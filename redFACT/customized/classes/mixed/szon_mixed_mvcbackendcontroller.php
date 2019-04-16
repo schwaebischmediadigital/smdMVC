@@ -45,8 +45,8 @@ class SZON_Mixed_MvcBackendController
 	 */
 	public static function callValidBackendFunction(string $mvcObjectName, string $function, array $functionParams)
 	{
-		if (in_array((string)$objectId, SZON_Mixed_MvcBackendController::getValidClassesList())) {
-			$objectInstance = SZON_Mixed_MvcClassLoader::getClass($objectId);
+		if (in_array((string)$mvcObjectName, SZON_Mixed_MvcBackendController::getValidClassesList())) {
+			$objectInstance = SZON_Mixed_MvcClassLoader::getClass($mvcObjectName);
 			if (is_object($objectInstance) AND $objectInstance->isValidBackendFunction($function)) {
 				return call_user_func_array([$objectInstance, $function], $functionParams);
 			}
