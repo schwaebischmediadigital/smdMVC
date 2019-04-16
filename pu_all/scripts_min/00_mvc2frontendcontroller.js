@@ -22,7 +22,7 @@
  *          20180205    MW  :   - Cleanup
  *          20180920    MW  :   - Extended element lists
  *          20180926    MW  :   - getMvcObjectFromId() and getChildFromMvcObject()
- *          20180927    MW  :   - _garbageCollector() for this.mvcObjects
+ *          20180927    MW  :   - garbageCollector() for this.mvcObjects
  *          20181022    MW  :   - callBackToObject() is now public
  *          201902      MW  :   - Cleanup
  *                              - Observer fixes
@@ -477,7 +477,7 @@ var mvc2frontendController = {
 					object[key] = mvc2baseInterface[key];
 				}
 			}
-			this._garbageCollector();
+			this.garbageCollector();
 			this.mvcObjects.push(object);
 
 			var _automaticRegisteredFields = object.querySelectorAll("[data-mvcswitcher]");
