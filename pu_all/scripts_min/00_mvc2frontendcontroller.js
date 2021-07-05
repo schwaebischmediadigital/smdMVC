@@ -27,6 +27,7 @@
  *          201902      MW  :   - Cleanup
  *                              - Observer fixes
  *          20190315    MW  :   - Automatic listeners with data attribute (data-mvcswitcher)
+ *          20190913    MW  :   - Removed CustomEvent
  *
  * @type {{mvcObjects: Array, addListener: mvc2frontendController.addListener, removeListener: mvc2frontendController.removeListener, addObserver: mvc2frontendController.addObserver, removeObserver: mvc2frontendController.removeObserver, callEvent: mvc2frontendController.callEvent, initMvcObject: mvc2frontendController.initMvcObject, queryBackEndController: mvc2frontendController.queryBackEndController, getMvcObjectFromId: mvc2frontendController.getMvcObjectFromId, getChildFromMvcObject: mvc2frontendController.getChildFromMvcObject, _uploadSupport: {init: mvc2frontendController._uploadSupport.init, addFileToPreviewList: mvc2frontendController._uploadSupport.addFileToPreviewList, sendUploadFileViaXHR: mvc2frontendController._uploadSupport.sendUploadFileViaXHR, stopAnEvent: mvc2frontendController._uploadSupport.stopAnEvent}, init: mvc2frontendController.init}}
  */
@@ -301,7 +302,7 @@ var mvc2frontendController = {
 					var defaultFunction = function (_defaultFunctionParams)
 					{
 						// Reset the error message CSS in case one is displayed.
-						var divDropzoneError = smdQS(".mvcDropzone[data-for='" + domObject.mvcObjectRealId + "']", mvcObject);
+						var divDropzoneError = $s.qs(".mvcDropzone[data-for='" + domObject.mvcObjectRealId + "']", mvcObject);
 						divDropzoneError.classList.remove('error');
 
 						// Send each file to the backend one at a time.
@@ -380,7 +381,7 @@ var mvc2frontendController = {
 		) {
 			var _mvcObject = mvc2frontendController.getMvcObjectFromId(observedObject.mvcClass);
 			if (_mvcObject !== null) {
-				observedObject = smdQS(observedObject.mvcChildSelector, _mvcObject);
+				observedObject = $s.qs(observedObject.mvcChildSelector, _mvcObject);
 			} else {
 				observedObject = null;
 			}
@@ -560,7 +561,7 @@ var mvc2frontendController = {
 			};
 		}
 
-		smdQS().ajax(_callObject);
+		$s.ajax(_callObject);
 	},
 
 	/**
@@ -617,8 +618,8 @@ var mvc2frontendController = {
 			mvcObject = this.getMvcObjectFromId(mvcObject);
 		}
 
-		if (typeof mvcObject === "object") {
-			return smdQS(cssSelector, mvcObject);
+		if (mvcObject !== null) {
+			return $s.qs(cssSelector, mvcObject);
 		}
 
 		return null;
@@ -682,7 +683,7 @@ var mvc2frontendController = {
 				var response = JSON.parse(xhr.responseText);
 
 				// Inject a preview for each uploaded file.
-				var divPreviewzone = smdQS(".mvcDropzonePreview[data-for='" + domObject.mvcObjectRealId + "']", mvcObject);
+				var divPreviewzone = $s.qs(".mvcDropzonePreview[data-for='" + domObject.mvcObjectRealId + "']", mvcObject);
 				for (var j = 0; j < response.length; j++) {
 					mvc2frontendController._uploadSupport.addFileToPreviewList(mvcObject, divPreviewzone, domObject.name, response[j].filename, response[j].url);
 				}
@@ -696,7 +697,7 @@ var mvc2frontendController = {
 			 */
 
 			// Add the click listener to the dropzone.
-			var divDropzone = smdQS(".mvcDropzone[data-for='" + domObject.mvcObjectRealId + "']", mvcObject);
+			var divDropzone = $s.qs(".mvcDropzone[data-for='" + domObject.mvcObjectRealId + "']", mvcObject);
 			divDropzone.addEventListener('click', function ()
 			{
 				domObject.click();
@@ -824,7 +825,7 @@ var mvc2frontendController = {
 			tempFormData.append(domObject.name, file);
 
 			// Fetch the progress bar and show it.
-			var progressbar           = smdQS(".mvcDropzoneProgress[data-for='" + domObject.mvcObjectRealId + "']", mvcObject);
+			var progressbar           = $s.qs(".mvcDropzoneProgress[data-for='" + domObject.mvcObjectRealId + "']", mvcObject);
 			progressbar.style.display = 'block';
 
 			// Send the form object to the backend.
@@ -839,7 +840,7 @@ var mvc2frontendController = {
 			};
 			xhr.onerror           = function ()
 			{
-				var divDropzone = smdQS(".mvcDropzone[data-for='" + domObject.mvcObjectRealId + "']", mvcObject);
+				var divDropzone = $s.qs(".mvcDropzone[data-for='" + domObject.mvcObjectRealId + "']", mvcObject);
 				divDropzone.classList.add('error');
 				mvc2platformSupport.popupMessage({
 					headline: "Es ist ein Fehler aufgetreten.",
@@ -858,7 +859,7 @@ var mvc2frontendController = {
 					var response = JSON.parse(xhr.responseText);
 
 					// Show a preview for each uploaded file.
-					var divPreviewzone = smdQS(".mvcDropzonePreview[data-for='" + domObject.mvcObjectRealId + "']", mvcObject);
+					var divPreviewzone = $s.qs(".mvcDropzonePreview[data-for='" + domObject.mvcObjectRealId + "']", mvcObject);
 					for (var j = 0; j < response.length; j++) {
 						mvc2frontendController._uploadSupport.addFileToPreviewList(mvcObject, divPreviewzone, domObject.name, response[j].filename, response[j].url);
 					}
@@ -893,15 +894,5 @@ var mvc2frontendController = {
 			event.preventDefault();
 			event.stopPropagation();
 		}
-	},
-
-	init: function ()
-	{
-		var event = new CustomEvent("mvc2frontendController::ready");
-		document.body.dispatchEvent(event);
 	}
 };
-smdQS().ready(function()
-{
-	mvc2frontendController.init();
-});

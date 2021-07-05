@@ -31,24 +31,24 @@ class miniTemplateEngine
 
 	public function render($templateName, $type)
 	{
-		$templatePath = "";
+		$_templatePath = "";
 		switch ($type) {
 			case 'publication':
-				$templatePath = $templateName;
+				$_templatePath = $templateName;
 				break;
 			default:
-				$templatePath = $type . "/" . $templateName;
+				$_templatePath = $type . "/" . $templateName;
 		}
 
-		if (is_file(GLOBAL_FRONTEND_DIR . "pu_" . PUBLICATION . "/templates/" . $templatePath . ".php")) {
-			require_once GLOBAL_FRONTEND_DIR . "pu_" . PUBLICATION . "/templates/" . $templatePath . ".php";
+		if (is_file(GLOBAL_FRONTEND_DIR . "pu_" . PUBLICATION . "/templates/" . $_templatePath . ".php")) {
+			require_once GLOBAL_FRONTEND_DIR . "pu_" . PUBLICATION . "/templates/" . $_templatePath . ".php";
 		} 
 
-		$_contentTemplate = $this->_loadTemplate($templatePath);
+		$_contentTemplate = $this->_loadTemplate($_templatePath);
 
 		if (!empty($this->tplVars)) {
-			foreach($this->tplVars AS $tplVarName => $tplVarValue) {
-				$_contentTemplate = str_replace('${' . $tplVarName . '}', $tplVarValue, $_contentTemplate);
+			foreach($this->tplVars AS $_tplVarName => $_tplVarValue) {
+				$_contentTemplate = str_replace('${' . $_tplVarName . '}', $_tplVarValue, $_contentTemplate);
 			}
 		}
 

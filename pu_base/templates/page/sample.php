@@ -7,7 +7,7 @@
  * 
  * Loads an object from the base_page_sample MVC class
  */
-$mvcObject = SZON_Mixed_MvcClassLoader::getClass('base_page_sample', []); // is needed if one wants to work with MVC. See /pu_all/templates/frontendbox.php
+$mvcObject = SZON_Mixed_MvcClassLoader::getClass('base_page_sample', []); // is needed if one wants to work with MVC. See /pu_all/templates/frontendbox.php which handles this on a redFACT installation
 
 /*
     Both vars are needed for the MVC in the html template, normally you would do something like this in redFACT:
@@ -15,7 +15,7 @@ $mvcObject = SZON_Mixed_MvcClassLoader::getClass('base_page_sample', []); // is 
 	$this->tplInstance->set('mvcObjectName', $objectClassName);
 	$this->tplInstance->set('javascriptObjectName', SZON_Mixed_MvcClassLoader::getScript($objectClassName) . ($cmsLogin ? "?".rand(11111111,99999999) : ""));
 
-	(look at /pu_all/templates/frontendbox.php)
+	(example again in /pu_all/templates/frontendbox.php)
  */
 $objectClassName = 'base_page_sample';
 $this->tplVars = [

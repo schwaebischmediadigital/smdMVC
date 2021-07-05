@@ -335,3 +335,4 @@ ASALocalRun/
 
 # macOS Stuff
 .DS_Store
+.phpintel

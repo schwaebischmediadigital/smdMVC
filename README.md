@@ -1,25 +1,29 @@
 # SMD MVC2
 
-The SMD MVC2 is an implementation for a frontend MVC on vanilla javascript. It uses [smdQS()](https://github.com/schwaebischmediadigital/smdqs) for document ready.
+The SMD MVC2 is an implementation for a frontend MVC on vanilla javascript. It uses [sApi()](https://github.com/codeandcreate/sApi) which is a fork if our internal javascript api.
+
+![flow chart of SMD MVC2](documentation/flowchart.png)
 
 It's build for [Newsfactory redFACT](https://www.newsfactory.de/solutions/cms-redfact.html) but can also used stand alone or with any other CMS. In this repository there are some sample scripts to use the MVC without redFACT. Some files may contain german comments. [Pure.css](https://purecss.io/) is usesd for the sample frontend.
 
-## Changes
+## Version history
 
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Version&nbsp;&nbsp;&nbsp;| Info |
 |---|---|---|
+| Juli 2021 | 2.1 | updated mvc, pure.css and replaced smdQS with sApi |
 | April 2019 | 2.0 | initial public version |
 
 ## Todos
 - Documentation
 
 ## Installation
+
 ### redFACT
 * Copy following files in your redFACT installation:
   - pu_all/ajax/mvcbackend.php
   - pu_all/scipts_min/00_mvc2baseInterface.js
   - pu_all/scipts_min/00_mvc2frontendcontroller.js
-  - pu_all/scipts_min/00_smdQS.js
+  - pu_all/scipts_min/00_sApi.min.js
   - (pu_base/scripts_min/00_mvc2platformSupport.js goes to your publication folder)
   - redFACT/customized/classes/mixed/mvcClasses/mvc_base.php
   - redFACT/customized/classes/mixed/szon_mixed_mvcbackendcontroller.php

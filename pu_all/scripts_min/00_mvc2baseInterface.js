@@ -150,7 +150,7 @@ var mvc2baseInterface = {
 	},
 
 	/**
-	 * Wrapper für mvc2platformSupport: Öffnet eine Popup Benachrichtigung
+	 * Wrapper für mvc2platformSupport: Öffnet einen Popup Benachrichtigung
 	 *
 	 * @param message
 	 * @param closeButtonCaption

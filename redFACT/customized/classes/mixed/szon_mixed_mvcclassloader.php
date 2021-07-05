@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Class SZON_Mixed_MvcClassLoader
  *
@@ -8,12 +7,13 @@
  * @changes 20180920    MW  :   - $moddata in getClass()
  * @changes 20190510    MW  :   - Cleanup
  */
+
 class SZON_Mixed_MvcClassLoader
 {
 	/**
 	 * Returns an object of $objectClassName
 	 * $moddata is optional
-	 * 
+	 *
 	 * @param       $objectClassName
 	 * @param array $moddata (optional)
 	 * @return bool|object
@@ -39,7 +39,7 @@ class SZON_Mixed_MvcClassLoader
 
 	/**
 	 * Returns the filename and path of a $objectClassName for a <script>-Tag
-	 * 
+	 *
 	 * @param $objectClassName
 	 * @return bool|string
 	 */
@@ -47,8 +47,11 @@ class SZON_Mixed_MvcClassLoader
 	{
 		$objectMeta = explode("_", $objectClassName);
 		$scriptName = "pu_" . strtolower($objectMeta[0]) . "/scripts/" . strtolower($objectClassName) . ".js";
-		if (file_exists(GLOBAL_FRONTEND_DIR . $scriptName)) {
-			return "/" . $scriptName;
+		$scriptMinName = "pu_" . strtolower($objectMeta[0]) . "/scripts/" . strtolower($objectClassName) . ".min.js";
+		if (file_exists(GLOBAL_FRONTEND_DIR . $scriptMinName) && !NFY_System_Mode::isDevDomain()) {
+			return "/" . $scriptMinName . "?v=" . filemtime(GLOBAL_FRONTEND_DIR . $scriptMinName);
+		} else if (file_exists(GLOBAL_FRONTEND_DIR . $scriptName)) {
+			return "/" . $scriptName . "?v=" . filemtime(GLOBAL_FRONTEND_DIR . $scriptName);
 		}
 
 		return false;

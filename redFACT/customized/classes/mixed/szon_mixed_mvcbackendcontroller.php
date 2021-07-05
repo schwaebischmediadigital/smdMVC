@@ -10,7 +10,7 @@ class SZON_Mixed_MvcBackendController
 {
 	/**
 	 * Returns a list of valid MVC classes
-	 * 
+	 *
 	 * @return array
 	 */
 	public static function getValidClassesList()
@@ -34,10 +34,10 @@ class SZON_Mixed_MvcBackendController
 
 		return $returnValue;
 	}
-	
+
 	/**
 	 * Calls a valid backend $function of the $mvcObjectName class with $functionParams
-	 * 
+	 *
 	 * @param string $mvcObjectName
 	 * @param string $function
 	 * @param array  $functionParams

@@ -6,26 +6,26 @@
  * Wrapper-Class / Registry Pattern Implementation
  *
  * @author  Matthias Weiß <m.weiss@smdigital.de>
- * @version 1.0
+ * @version 1.1
  */
 class SZON_Mixed_Registry extends NFY_Mixed_Base
 {
 	/**
 	 * @var null | SZON_Mixed_Registry
 	 */
-	private static $instance     = null;
+	private static $instance = null;
 
 	/**
 	 * Array with data for the "self" data provider
 	 *
 	 * @var array
 	 */
-	private        $cachedData   = [];
+	private $cachedData = [];
 
 	/**
 	 * @var string
 	 */
-	private        $dataProvider = "";
+	private $dataProvider = "";
 
 	/**
 	 * Returns an Instance of SZON_Mixed_Registry
@@ -72,12 +72,15 @@ class SZON_Mixed_Registry extends NFY_Mixed_Base
 				} else if (session_status() === PHP_SESSION_NONE) {
 					session_start();
 				}
-
 				break;
-
 			case 'mixedCache':
 				if (!class_exists("NFY_Mixed_Cache")) {
 					throw new Exception(get_class() . ' - NFY_Mixed_Cache not defined.');
+				}
+				break;
+			case 'szonMixedCache':
+				if (!class_exists("SZON_Mixed_Cache")) {
+					throw new Exception(get_class() . ' - SZON_Mixed_Cache not defined.');
 				}
 		}
 	}
@@ -96,6 +99,9 @@ class SZON_Mixed_Registry extends NFY_Mixed_Base
 		switch ($this->dataProvider) {
 			case 'mixedCache':
 				NFY_Mixed_Cache::saveCacheData("SmdReg:" . $md5key, $value);
+				break;
+			case 'szonMixedCache':
+				SZON_Mixed_Cache::saveCacheData("SmdReg:" . $md5key, $value);
 				break;
 			case 'session':
 				$_SESSION[get_class() . ":" . $md5key] = $value;
@@ -121,6 +127,14 @@ class SZON_Mixed_Registry extends NFY_Mixed_Base
 		switch ($this->dataProvider) {
 			case 'mixedCache':
 				$cachedData = NFY_Mixed_Cache::getCacheData("SmdReg:" . $md5key, 6000);
+				if ($cachedData) {
+					$this->set($key, $cachedData);
+
+					return $cachedData;
+				}
+				break;
+			case 'szonMixedCache':
+				$cachedData = SZON_Mixed_Cache::getCacheData("SmdReg:" . $md5key, 6000);
 				if ($cachedData) {
 					$this->set($key, $cachedData);
 

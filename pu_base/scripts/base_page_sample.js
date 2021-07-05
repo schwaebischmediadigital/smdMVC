@@ -5,7 +5,7 @@
  * All dom nodes inside this box with an "data-mvcswitcher" attribute will automaticly have listeners to interact with the backend
  */
 
-smdQS().ready(function ()
+$s.ready(function ()
 {
 	var base_page_trail = mvc2frontendController.initMvcObject("base_page_sample");
 

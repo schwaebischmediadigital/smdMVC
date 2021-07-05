@@ -2,7 +2,7 @@
 /**
  * SAMPLE CODE
  *
- * Somewhat like the /index.php and /pu_.../publication.php to get the MVC to work without redFACT
+ * Somewhat like the redFACT /index.php to get the MVC to work without redFACT
  */
 
 include dirname(__FILE__) . "/inc/config.php";

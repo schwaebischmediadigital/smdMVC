@@ -1,6 +1,8 @@
 <?php
 /**
  * SAMPLE CODE
+ * 
+ * somewhat like the redFACT /pu_.../publication.php
  *
  * @var $this miniTemplateEngine
  */
