@@ -10,6 +10,7 @@ It's build for [Newsfactory redFACT](https://www.newsfactory.de/solutions/cms-re
 
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Version&nbsp;&nbsp;&nbsp;| Info |
 |---|---|---|
+| March 2022 | 2.1 | updated with internal version |
 | Juli 2021 | 2.1 | updated mvc, pure.css and replaced smdQS with sApi |
 | April 2019 | 2.0 | initial public version |
 

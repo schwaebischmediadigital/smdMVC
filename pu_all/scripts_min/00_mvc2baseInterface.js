@@ -150,7 +150,7 @@ var mvc2baseInterface = {
 	},
 
 	/**
-	 * Wrapper für mvc2platformSupport: Öffnet einen Popup Benachrichtigung
+	 * Wrapper für mvc2platformSupport: Öffnet eine Popup Benachrichtigung
 	 *
 	 * @param message
 	 * @param closeButtonCaption
@@ -167,7 +167,7 @@ var mvc2baseInterface = {
 	},
 
 	/**
-	 * Wrapper für mvc2platformSupport: Öffnet einen Lade-Layer
+	 * Wrapper für mvc2platformSupport: Öffnet eine Lade-Layer
 	 */
 	showLoading: function ()
 	{

@@ -4,7 +4,7 @@
  * Class SZON_Mixed_MvcBackendController
  *
  * @author  Matthias Weiß <m.weiss@smdigital.de>
- * @version 1.0
+ * @version 1.1
  */
 class SZON_Mixed_MvcBackendController
 {
@@ -13,7 +13,7 @@ class SZON_Mixed_MvcBackendController
 	 *
 	 * @return array
 	 */
-	public static function getValidClassesList()
+	public static function getValidClassesList(): array
 	{
 		$returnValue = [];
 
@@ -45,11 +45,15 @@ class SZON_Mixed_MvcBackendController
 	 */
 	public static function callValidBackendFunction(string $mvcObjectName, string $function, array $functionParams)
 	{
-		if (in_array((string)$mvcObjectName, SZON_Mixed_MvcBackendController::getValidClassesList())) {
-			$objectInstance = SZON_Mixed_MvcClassLoader::getClass($mvcObjectName);
-			if (is_object($objectInstance) AND $objectInstance->isValidBackendFunction($function)) {
-				return call_user_func_array([$objectInstance, $function], $functionParams);
+		try {
+			if (in_array((string)$mvcObjectName, SZON_Mixed_MvcBackendController::getValidClassesList())) {
+				$objectInstance = SZON_Mixed_MvcClassLoader::getClass($mvcObjectName);
+				if (is_object($objectInstance) AND $objectInstance->isValidBackendFunction($function)) {
+					return call_user_func_array([$objectInstance, $function], $functionParams);
+				}
 			}
+		} catch (Exception $exception) {
+			NFY_Mixed_Base::errorLog(debug_backtrace()[1]['function'] . ": " . $exception->getMessage(), get_class());
 		}
 
 		return null;
